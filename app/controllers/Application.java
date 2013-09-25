@@ -1,5 +1,6 @@
 package controllers;
 
+import play.*;
 import play.mvc.*;
 import play.data.*;
 import models.*;
@@ -31,9 +32,8 @@ public class Application extends Controller {
         }
     }
 
-    public static Result deleteTask(Long id) {
+    public static Result deleteTask(String id) {
         Task.delete(id);
         return Results.redirect(routes.Application.tasks());
     }
-  
 }

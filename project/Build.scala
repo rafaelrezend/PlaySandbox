@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "postgresql" % "postgresql" % "8.4-702.jdbc4"
+    "postgresql" % "postgresql" % "8.4-702.jdbc4",
+    "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
