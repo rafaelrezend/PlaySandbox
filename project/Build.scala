@@ -5,14 +5,11 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "PlaySandbox"
-  val appVersion      = "1.0-SNAPSHOT"
+  val appVersion      = "0.2"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
     javaCore,
-    javaJdbc,
-    javaEbean,
-    "postgresql" % "postgresql" % "8.4-702.jdbc4",
     "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0"
   )
 
