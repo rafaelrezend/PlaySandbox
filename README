@@ -1,13 +1,14 @@
 Play Sandbox
 =====================================
 Testing Play framework and its potential for future personal projects.
+Project created in IntelliJ
 
 
 
 Version history:
 
 v0.2
-  H2 database replaced by MongoDB NoSQL, using Jackson.
+  H2 database replaced by MongoDB NoSQL, using Jackson (http://mongojack.org/).
   Similar to https://github.com/Mironor/Play-2.0-Java-MongoDb-Jackson-exemple.
   Deployment to Heroku not tested. Existing MongoDB modules require credit card, though they have free options.
 
