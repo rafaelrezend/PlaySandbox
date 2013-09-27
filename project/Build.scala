@@ -10,7 +10,8 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     // Add your project dependencies here,
     javaCore,
-    "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0"
+    "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0",
+    "org.mongojack" % "mongojack" % "2.0.0-RC5"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(

@@ -2,10 +2,12 @@ package models;
 
 import java.util.*;
 import play.modules.mongodb.jackson.MongoDB;
-import net.vz.mongodb.jackson.JacksonDBCollection;
-import net.vz.mongodb.jackson.Id;
-import net.vz.mongodb.jackson.ObjectId;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.Id;
+import org.mongojack.ObjectId;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.mongojack.DBQuery.*;
+import org.mongojack.DBQuery;
 
 import javax.persistence.*;
 
@@ -34,5 +36,10 @@ public class Task{
         if (task != null)
             Task.coll.remove(task);
     }
+
+    /*public static List<Task> search(String text) {
+//        return Task.coll.find().is("label", text).toArray();
+        return Task.coll.find().toArray();
+    }*/
 
 }

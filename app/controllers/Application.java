@@ -33,4 +33,16 @@ public class Application extends Controller {
         Task.delete(id);
         return Results.redirect(routes.Application.tasks());
     }
+
+    /*public static Result search() {
+        Form<Task> filledForm = taskForm.bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(
+                    views.html.search.render(Task.all(), filledForm)
+            );
+        } else {
+            //return ok(views.html.search.render(Task.search(filledForm.get()), taskForm));
+            return ok(views.html.index.render(Task.all(), taskForm));
+        }
+    }*/
 }

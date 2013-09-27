@@ -1,0 +1,35 @@
+@(tasks: List[Task], taskForm: Form[Task])
+
+@import helper._
+
+@main("Todo list") {
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Label</th>
+        <th>Private</th>
+    </tr>
+
+    <h1>@tasks.size() task(s)</h1>
+
+    @for(task <- tasks) {
+    <tr>
+        <td><i>@task.id</i></td>
+        <td>@task.label</td>
+        <td>@task.isPrivate</td>
+    </tr>
+    }
+</table>
+
+<h2>Search</h2>
+
+@form(routes.Application.tasks()) {
+
+@inputText(taskForm("text"))
+
+<input type="submit" value="Search">
+
+}
+
+}
