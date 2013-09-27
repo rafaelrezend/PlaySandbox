@@ -15,6 +15,8 @@ public class Task{
     @ObjectId
     public String id;
 
+    public boolean isPrivate;
+
     public String label;
 
     private static JacksonDBCollection<Task, String> coll = MongoDB.getCollection("tasks", Task.class, String.class);
