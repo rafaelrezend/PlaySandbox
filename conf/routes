@@ -14,4 +14,4 @@ POST    /tasks/:id/delete           controllers.Application.deleteTask(id: Strin
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Search
-GET     /search                     controllers.Application.tasks()
+GET     /search                     controllers.Application.search()

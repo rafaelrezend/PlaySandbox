@@ -39,9 +39,9 @@ public class Task {
             Task.coll.removeById(id);
     }
 
-    /*public static List<Task> search(String text) {
+    public static List<Task> search(String text) {
 //        return Task.coll.find().is("label", text).toArray();
         return Task.coll.find().toArray();
-    }*/
+    }
 
 }

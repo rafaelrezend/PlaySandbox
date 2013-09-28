@@ -34,7 +34,7 @@ public class Application extends Controller {
         return Results.redirect(routes.Application.tasks());
     }
 
-    /*public static Result search() {
+    public static Result search() {
         Form<Task> filledForm = taskForm.bindFromRequest();
         if(filledForm.hasErrors()) {
             return badRequest(
@@ -42,7 +42,7 @@ public class Application extends Controller {
             );
         } else {
             //return ok(views.html.search.render(Task.search(filledForm.get()), taskForm));
-            return ok(views.html.index.render(Task.all(), taskForm));
+            return ok(views.html.search.render(Task.all(), taskForm));
         }
-    }*/
+    }
 }
