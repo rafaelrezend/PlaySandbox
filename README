@@ -1,11 +1,11 @@
 Play Sandbox
 =====================================
 Testing Play framework and its potential for future personal projects.
-Project created in IntelliJ
-
-
 
 Version history:
+
+v0.2.1
+  Libraries updated: mongojack and play-mongojack.
 
 v0.2
   H2 database replaced by MongoDB NoSQL, using Jackson (http://mongojack.org/).

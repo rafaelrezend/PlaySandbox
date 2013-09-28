@@ -1,7 +1,8 @@
 package models;
 
 import java.util.*;
-import play.modules.mongodb.jackson.MongoDB;
+
+import play.modules.mongojack.MongoDB;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
@@ -11,7 +12,7 @@ import org.mongojack.DBQuery;
 
 import javax.persistence.*;
 
-public class Task{
+public class Task {
 
     @Id
     @ObjectId
@@ -34,7 +35,8 @@ public class Task{
     public static void delete(String id) {
         Task task = Task.coll.findOneById(id);
         if (task != null)
-            Task.coll.remove(task);
+            // This method looks for the @ObjectId element. A query is required for removing based on other fields.
+            Task.coll.removeById(id);
     }
 
     /*public static List<Task> search(String text) {

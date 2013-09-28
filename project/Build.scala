@@ -5,12 +5,12 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "PlaySandbox"
-  val appVersion      = "0.2"
+  val appVersion      = "0.2.1"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
     javaCore,
-    "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0",
+    "org.mongojack" %% "play-mongojack" % "2.0.0-RC2",
     "org.mongojack" % "mongojack" % "2.0.0-RC5"
   )
 
