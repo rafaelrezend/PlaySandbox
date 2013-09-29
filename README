@@ -5,7 +5,7 @@ Testing Play framework and its potential for future personal projects.
 Version history:
 
 v0.3
-  Search implemented using both DBQuery.Query or BasicDBObject methods.
+  Search implemented using both DBQuery.Query and BasicDBObject methods.
 
 v0.2.1
   Libraries updated: mongojack and play-mongojack.
