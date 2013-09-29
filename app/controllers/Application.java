@@ -6,43 +6,39 @@ import models.*;
 
 public class Application extends Controller {
 
-    static Form<Task> taskForm = Form.form(Task.class);
-  
-    public static Result index() {
-//        return ok(index.render("Testing without recompiling?"));
-        return redirect(routes.Application.tasks());
-    }
+	static Form<Task> taskForm = Form.form(Task.class);
 
-    public static Result tasks() {
-        return ok(views.html.index.render(Task.all(), taskForm));
-    }
+	public static Result index() {
+		// return ok(index.render("Testing without recompiling?"));
+		return redirect(routes.Application.tasks());
+	}
 
-    public static Result newTask() {
-        Form<Task> filledForm = taskForm.bindFromRequest();
-        if(filledForm.hasErrors()) {
-            return badRequest(
-                    views.html.index.render(Task.all(), filledForm)
-            );
-        } else {
-            Task.create(filledForm.get());
-            return redirect(routes.Application.tasks());
-        }
-    }
+	public static Result tasks() {
+		return ok(views.html.index.render(Task.all(), taskForm));
+	}
 
-    public static Result deleteTask(String id) {
-        Task.delete(id);
-        return Results.redirect(routes.Application.tasks());
-    }
+	public static Result newTask() {
+		Form<Task> filledForm = taskForm.bindFromRequest();
+		if (filledForm.hasErrors()) {
+			return badRequest(views.html.index.render(Task.all(), filledForm));
+		} else {
+			Task.create(filledForm.get());
+			return redirect(routes.Application.tasks());
+		}
+	}
 
-    public static Result search() {
-        Form<Task> filledForm = taskForm.bindFromRequest();
-        if(filledForm.hasErrors()) {
-            return badRequest(
-                    views.html.search.render(Task.all(), filledForm)
-            );
-        } else {
-            //return ok(views.html.search.render(Task.search(filledForm.get()), taskForm));
-            return ok(views.html.search.render(Task.all(), taskForm));
-        }
-    }
+	public static Result deleteTask(String id) {
+		Task.delete(id);
+		return Results.redirect(routes.Application.tasks());
+	}
+
+	public static Result search() {
+		Form<Task> filledForm = taskForm.bindFromRequest();
+		if (filledForm.hasErrors()) {
+			return badRequest(views.html.search.render(Task.all(), filledForm));
+		} else {
+//			return ok(views.html.search.render(Task.searchByObject(filledForm.get()), filledForm));
+			return ok(views.html.search.render(Task.search(filledForm.get()), filledForm));
+		}
+	}
 }

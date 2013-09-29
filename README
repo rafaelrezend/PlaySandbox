@@ -4,8 +4,12 @@ Testing Play framework and its potential for future personal projects.
 
 Version history:
 
+v0.3
+  Search implemented using both DBQuery.Query or BasicDBObject methods.
+
 v0.2.1
   Libraries updated: mongojack and play-mongojack.
+  Reference: https://github.com/jroper/play-mongojack.
 
 v0.2
   H2 database replaced by MongoDB NoSQL, using Jackson (http://mongojack.org/).
