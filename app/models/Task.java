@@ -4,34 +4,69 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import play.modules.mongojack.MongoDB;
-
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
-
 import com.mongodb.BasicDBObject;
 
+/**
+ * This class represents a simple task with id, label and a flag isPrivate.
+ * Objects of this class are stored/retrieved from the mongodb database using
+ * mongojack library.
+ * 
+ * @author Rafael
+ * 
+ */
 public class Task {
 
+	/**
+	 * Unique ID. Usually auto-assigned by mongojack.
+	 */
 	@Id
 	@ObjectId
 	public String id;
 
+	/**
+	 * Flag to identify this task is private or not.
+	 */
 	public boolean isPrivate;
 
+	/**
+	 * Name of the task.
+	 */
 	public String label;
 
+	/**
+	 * MongoDB Jackson representation for collection "task".
+	 */
 	private static JacksonDBCollection<Task, String> coll = MongoDB
 			.getCollection("tasks", Task.class, String.class);
 
+	/**
+	 * Lists all task in the collection.
+	 * 
+	 * @return list containing all tasks.
+	 */
 	public static List<Task> all() {
 		return Task.coll.find().toArray();
 	}
 
+	/**
+	 * Adds a task to collection.
+	 * 
+	 * @param task
+	 *            Task to be added to collection.
+	 */
 	public static void create(Task task) {
 		Task.coll.save(task);
 	}
 
+	/**
+	 * Deletes a task from collection according to the task id.
+	 * 
+	 * @param id
+	 *            Id of the task to be deleted.
+	 */
 	public static void delete(String id) {
 		Task task = Task.coll.findOneById(id);
 		if (task != null)
@@ -52,7 +87,8 @@ public class Task {
 	 */
 	public static List<Task> search(Task task) {
 		String label = "";
-		if (task.label != null) label = task.label;
+		if (task.label != null)
+			label = task.label;
 		return Task.coll.find()
 				.regex("label", Pattern.compile(".*" + label + ".*")).toArray();
 
