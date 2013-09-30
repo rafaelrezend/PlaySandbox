@@ -4,9 +4,11 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import play.modules.mongojack.MongoDB;
+
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
+
 import com.mongodb.BasicDBObject;
 
 /**
@@ -37,18 +39,18 @@ public class Task {
 	public String label;
 
 	/**
-	 * MongoDB Jackson representation for collection "task".
+	 * MongoDB Jackson representation for collection "tasks".
 	 */
-	private static JacksonDBCollection<Task, String> coll = MongoDB
+	private static JacksonDBCollection<Task, String> taskColl = MongoDB
 			.getCollection("tasks", Task.class, String.class);
 
 	/**
-	 * Lists all task in the collection.
+	 * Lists all tasks in the collection.
 	 * 
 	 * @return list containing all tasks.
 	 */
 	public static List<Task> all() {
-		return Task.coll.find().toArray();
+		return Task.taskColl.find().toArray();
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class Task {
 	 *            Task to be added to collection.
 	 */
 	public static void create(Task task) {
-		Task.coll.save(task);
+		Task.taskColl.save(task);
 	}
 
 	/**
@@ -68,11 +70,11 @@ public class Task {
 	 *            Id of the task to be deleted.
 	 */
 	public static void delete(String id) {
-		Task task = Task.coll.findOneById(id);
+		Task task = Task.taskColl.findOneById(id);
 		if (task != null)
 			// This method looks for the @ObjectId element. A query is required
 			// for removing based on other fields.
-			Task.coll.removeById(id);
+			Task.taskColl.removeById(id);
 	}
 
 	/**
@@ -89,7 +91,7 @@ public class Task {
 		String label = "";
 		if (task.label != null)
 			label = task.label;
-		return Task.coll.find()
+		return Task.taskColl.find()
 				.regex("label", Pattern.compile(".*" + label + ".*")).toArray();
 
 	}
@@ -110,6 +112,6 @@ public class Task {
 		if (label != null && !label.isEmpty())
 			ref.append("label", label);
 
-		return Task.coll.find(ref).toArray();
+		return Task.taskColl.find(ref).toArray();
 	}
 }

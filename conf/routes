@@ -15,3 +15,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Search
 GET     /search                     controllers.Application.search()
+
+# User
+GET		/users						controllers.UserController.users()
+POST	/users						controllers.UserController.newUser()

@@ -1,0 +1,45 @@
+@(users: List[User], userForm: Form[User])
+
+@import helper._
+
+@main("Todo list") {
+
+    <table border="1">
+    <tr>
+        <th>E-mail</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Action</th>
+    </tr>
+
+    <h1>@users.size() task(s)</h1>
+
+    @for(user <- users) {
+    <tr>
+        <td><i>@user.email</i></td>
+        <td>@user.name</td>
+        <td>@user.password</td>
+        <td>
+        @form(routes.Application.deleteTask(user.email)) {
+        <input type="submit" value="Delete">
+        }
+        </td>
+    </tr>
+    }
+    </table>
+
+    <h2>Add a new user</h2>
+
+    @form(routes.UserController.newUser()) {
+    
+        @inputText(userForm("email"))
+
+        @inputText(userForm("name"))
+        
+        @inputText(userForm("password"))
+
+        <input type="submit" value="Create">
+
+    }
+
+}
