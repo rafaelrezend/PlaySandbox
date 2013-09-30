@@ -4,6 +4,10 @@ Testing Play framework and its potential for future personal projects.
 
 Version history:
 
+v0.4
+  User object implemented having user email as primary key.
+  Respective search implemented as well.
+
 v0.3
   Search implemented using both DBQuery.Query and BasicDBObject methods.
 

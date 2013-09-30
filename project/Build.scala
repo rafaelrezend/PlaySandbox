@@ -11,7 +11,8 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     javaCore,
     "org.mongojack" %% "play-mongojack" % "2.0.0-RC2",
-    "org.mongojack" % "mongojack" % "2.0.0-RC5"
+    "org.mongojack" % "mongojack" % "2.0.0-RC5",
+    "org.mindrot" % "jbcrypt" % "0.3m"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
