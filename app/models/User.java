@@ -8,28 +8,31 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
+import org.mongojack.ObjectId;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import play.modules.mongojack.MongoDB;
 
 /**
- * @author Rafael
+ * This class represents the User entity.
+ * User objects are stored to the MongoDB using mongojack.
+ * User attributes are annotated with JsonProperty to shorten their names and save storage space.
  * 
+ * @author Rafael Rezende (rafaelrezend@gmail.com)
+ *
  */
 public class User {
 
 	@Id
 	public String email;
+	@JsonProperty("n")
 	public String name;
+	@JsonProperty("p")
 	public String password;
-
-	public void setPassword(String password) {
-		if (password == null) {
-			System.out.println("Password NULL!!");
-			this.password = "";
-		} else
-			this.password = encryptPassword(password);
-	}
-
+	@JsonProperty("t")
+	// public List<ObjectId> taskList;
+	
 	/**
 	 * MongoDB Jackson representation for collection "users".
 	 */
@@ -46,12 +49,17 @@ public class User {
 	}
 
 	/**
-	 * Adds a user to collection.
+	 * Adds a user to collection. It forces the password to be encrypted.
 	 * 
 	 * @param user
 	 *            User to be added to collection.
 	 */
 	public static void create(User user) {
+		// takes the input non-encrypted password and forces the encryption
+		// before saving the user to database.
+		user.password = encryptPassword(user.password);
+
+		// note: save method = insert + update methods.
 		User.userColl.save(user);
 	}
 
@@ -62,7 +70,7 @@ public class User {
 	 *            E-mail of the user to be deleted.
 	 */
 	public static void delete(String email) {
-		User user = User.userColl.findOneById(email);
+		User user = User.search(email);
 		if (user != null)
 			// This method looks for the @ObjectId element. A query is required
 			// for removing based on other fields.
@@ -91,7 +99,7 @@ public class User {
 	 *            Password to be encrypted.
 	 * @return The encrypted password.
 	 */
-	public String encryptPassword(String password) {
+	public static String encryptPassword(String password) {
 		return BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
@@ -104,10 +112,16 @@ public class User {
 	 *            Encrypted
 	 * @return
 	 */
-	public static boolean checkPassword(String attemptPassword, User user) {
-		if (attemptPassword == null) {
+	public static boolean checkPassword(String attemptPassword, String email) {
+		// get the user object using the email reference
+		User user = User.search(email);
+		if (user == null)
 			return false;
-		}
+		// check if the attempted password is valid
+		if (attemptPassword == null)
+			return false;
+		
+		// return the boolean match between the stored and the attempted passwords
 		return BCrypt.checkpw(attemptPassword, user.password);
 	}
 

@@ -16,8 +16,8 @@ import com.mongodb.BasicDBObject;
  * Objects of this class are stored/retrieved from the mongodb database using
  * mongojack library.
  * 
- * @author Rafael
- * 
+ * @author Rafael Rezende (rafaelrezend@gmail.com)
+ *
  */
 public class Task {
 
@@ -60,6 +60,7 @@ public class Task {
 	 *            Task to be added to collection.
 	 */
 	public static void create(Task task) {
+		// note: save method = insert + update methods.
 		Task.taskColl.save(task);
 	}
 
