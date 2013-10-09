@@ -67,9 +67,6 @@ public class UserController extends Controller {
 		if (filledForm.hasErrors()) {
 			return badRequest(views.html.search_user.render(null, filledForm));
 		} else {
-			// return
-			// ok(views.html.search.render(Task.searchByObject(filledForm.get()),
-			// filledForm));
 			User user = filledForm.get();
 			user = User.search(user.email);
 			

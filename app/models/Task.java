@@ -8,6 +8,7 @@ import play.modules.mongojack.MongoDB;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
+import org.mongojack.WriteResult;
 
 import com.mongodb.BasicDBObject;
 
@@ -59,9 +60,9 @@ public class Task {
 	 * @param task
 	 *            Task to be added to collection.
 	 */
-	public static void create(Task task) {
+	public static WriteResult<Task, String> create(Task task) {
 		// note: save method = insert + update methods.
-		Task.taskColl.save(task);
+		return Task.taskColl.save(task);
 	}
 
 	/**

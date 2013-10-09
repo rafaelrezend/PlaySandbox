@@ -3,12 +3,13 @@
  */
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
-import org.mongojack.ObjectId;
+import org.mongojack.WriteResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,14 +32,34 @@ public class User {
 	@JsonProperty("p")
 	public String password;
 	@JsonProperty("t")
-	// public List<ObjectId> taskList;
+	public List<String> taskList;
 	
+	/** Default Constructor */
+	public User(){};
+	
+	/**
+	 * Parametrized constructor.
+	 * 
+	 * @param email User's e-mail. Unique key.
+	 * @param name User's name.
+	 * @param password Non encrypted user's password.
+	 * @param taskList List of tasks assigned to this user.
+	 */
+	public User(String email, String name, String password,
+			List<String> taskList) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.taskList = taskList;
+	}
+
 	/**
 	 * MongoDB Jackson representation for collection "users".
 	 */
 	private static JacksonDBCollection<User, String> userColl = MongoDB
 			.getCollection("users", User.class, String.class);
-
+	
 	/**
 	 * Lists all users in the collection.
 	 * 
@@ -58,6 +79,22 @@ public class User {
 		// takes the input non-encrypted password and forces the encryption
 		// before saving the user to database.
 		user.password = encryptPassword(user.password);
+		
+		// Dummy test to create tasks and assign to user.
+//		Task task = new Task();
+//		task.isPrivate=true;
+//		task.label="Testing";
+//		
+//		WriteResult<Task, String> wr = Task.create(task);
+//		
+//		System.out.println("CONTENT HERE: " + wr.getSavedObject().id);
+//		
+//		user.taskList = new ArrayList<String>();
+//		
+//		user.taskList.add(wr.getSavedObject().id);
+//		
+//		wr = Task.create(task);
+//		user.taskList.add(wr.getSavedObject().id);
 
 		// note: save method = insert + update methods.
 		User.userColl.save(user);
